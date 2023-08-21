@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('descripcion');
             $table->integer('state');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

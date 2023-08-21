@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('descripcion');
             $table->integer('state')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

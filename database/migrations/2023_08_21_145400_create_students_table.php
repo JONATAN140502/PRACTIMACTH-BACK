@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('user_name');
             $table->string('password');
             $table->dateTime('last_access');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();
