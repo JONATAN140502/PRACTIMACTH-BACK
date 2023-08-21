@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('dni')->unique();
             $table->string('correo')->unique();
             $table->string('phone');
-            $table->integer('id_school');
+            $table->unsignedInteger('id_school');
             $table->foreign('id_school')->references('id')->on('schools');
             $table->string('skills');
             $table->integer('state');

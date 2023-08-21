@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('descripcion');
-            $table->integer('id_specialty');
+            $table->unsignedInteger('id_specialty');
             $table->foreign('id_specialty')->references('id')->on('specialties');
             $table->integer('state');
             $table->timestamps();

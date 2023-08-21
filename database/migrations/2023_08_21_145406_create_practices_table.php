@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('status');
             $table->string('workload');
             $table->string('vacant');
-            $table->integer('id_company');
+            $table->unsignedInteger('id_company');
             $table->foreign('id_company')->references('id')->on('companies');
             $table->integer('views');
             $table->timestamps();

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('descripcion');
             $table->integer('id_school');
             $table->integer('state');
-            $table->bigInteger('id_area');
+            $table->unsignedInteger('id_area');
             $table->foreign('id_area')->references('id')->on('areas');
             $table->timestamps();
             $table->softDeletes();

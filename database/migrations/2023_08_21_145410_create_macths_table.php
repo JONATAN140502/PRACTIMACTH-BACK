@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('knowledge_practices', function (Blueprint $table) {
+        Schema::create('matchs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_practice');
+            $table->unsignedInteger('id_practice');
             $table->foreign('id_practice')->references('id')->on('practices');
-            $table->integer('id_knowledges');
-            $table->foreign('id_knowledges')->references('id')->on('knowledges');
+            $table->unsignedInteger('id_student');
+            $table->foreign('id_student')->references('id')->on('students');
+            $table->date('date');
+            $table->integer('state');
+            $table->string('ratings');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('knowledge_practices');
+        Schema::dropIfExists('macths');
     }
 };

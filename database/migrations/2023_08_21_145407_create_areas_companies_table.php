@@ -15,9 +15,9 @@ return new class extends Migration
 
         Schema::create('areas_companies', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_company');
+            $table->unsignedInteger('id_company');
             $table->foreign('id_company')->references('id')->on('companies');
-            $table->integer('id_area');
+            $table->unsignedInteger('id_area');
             $table->foreign('id_area')->references('id')->on('areas');
             $table->integer('state');
             $table->timestamps();

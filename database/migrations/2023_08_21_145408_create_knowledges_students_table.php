@@ -15,9 +15,9 @@ return new class extends Migration
 
         Schema::create('knowledges_students', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_student');
+            $table->unsignedInteger('id_student');
             $table->foreign('id_student')->references('id')->on('students');
-            $table->integer('id_knowledges');
+            $table->unsignedInteger('id_knowledges');
             $table->foreign('id_knowledges')->references('id')->on('knowledges');
             $table->integer('state');
             $table->timestamps();
