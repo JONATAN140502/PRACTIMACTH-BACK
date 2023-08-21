@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('state');
             $table->bigInteger('id_area');
             $table->foreign('id_area')->references('id')->on('areas');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

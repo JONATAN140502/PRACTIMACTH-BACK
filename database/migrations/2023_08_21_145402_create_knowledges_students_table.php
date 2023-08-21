@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('id_knowledges');
             $table->foreign('id_knowledges')->references('id')->on('knowledges');
             $table->integer('state');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

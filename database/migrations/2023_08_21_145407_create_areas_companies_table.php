@@ -15,11 +15,13 @@ return new class extends Migration
 
         Schema::create('areas_companies', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_companie');
-            $table->foreign('id_companie')->references('id')->on('companies');
+            $table->integer('id_company');
+            $table->foreign('id_company')->references('id')->on('companies');
             $table->integer('id_area');
             $table->foreign('id_area')->references('id')->on('areas');
             $table->integer('state');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

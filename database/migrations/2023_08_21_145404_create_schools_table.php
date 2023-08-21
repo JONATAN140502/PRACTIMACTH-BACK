@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('code');
             $table->integer('state');
-            $table->integer('id_facultie');
-            $table->foreign('id_facultie')->references('id')->on('faculties');
+            $table->integer('id_faculty');
+            $table->foreign('id_faculty')->references('id')->on('faculties');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

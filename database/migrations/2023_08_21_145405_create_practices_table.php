@@ -23,9 +23,11 @@ return new class extends Migration
             $table->integer('status');
             $table->string('workload');
             $table->string('vacant');
-            $table->integer('id_companie');
-            $table->foreign('id_companie')->references('id')->on('companies');
+            $table->integer('id_company');
+            $table->foreign('id_company')->references('id')->on('companies');
             $table->integer('views');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

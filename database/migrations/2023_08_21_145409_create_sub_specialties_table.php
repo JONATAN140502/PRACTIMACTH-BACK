@@ -17,9 +17,11 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('descripcion');
-            $table->integer('id_specialtie');
-            $table->foreign('id_specialtie')->references('id')->on('specialties');
+            $table->integer('id_specialty');
+            $table->foreign('id_specialty')->references('id')->on('specialties');
             $table->integer('state');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();
