@@ -28,6 +28,8 @@ return new class extends Migration
             $table->integer('valoration');
             $table->string('user_name');
             $table->string('password');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

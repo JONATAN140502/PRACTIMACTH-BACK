@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('macths', function (Blueprint $table) {
+        Schema::create('matchs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_practice');
             $table->foreign('id_practice')->references('id')->on('practices');
@@ -22,6 +22,8 @@ return new class extends Migration
             $table->date('date');
             $table->integer('state');
             $table->string('ratings');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();
