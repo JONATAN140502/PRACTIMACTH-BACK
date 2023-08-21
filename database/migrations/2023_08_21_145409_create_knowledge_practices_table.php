@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('id_practice')->references('id')->on('practices');
             $table->unsignedInteger('id_knowledges');
             $table->foreign('id_knowledges')->references('id')->on('knowledges');
+            $table->integer('state')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

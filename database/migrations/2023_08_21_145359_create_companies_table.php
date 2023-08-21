@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('valoration');
             $table->string('user_name');
             $table->string('password');
+            $table->integer('state')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

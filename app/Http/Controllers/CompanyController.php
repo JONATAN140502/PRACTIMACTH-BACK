@@ -71,7 +71,6 @@ class CompanyController extends Controller
         $companyObj->user_name = trim($request->user_name);
         $companyObj->password = trim($request->password);
         $companyObj->state = trim($request->state);
-        
         $companyObj->save();
 
         $data[] = $companyObj;
@@ -89,7 +88,22 @@ class CompanyController extends Controller
 
     protected function show($id)
     {
-        $company = Company::select('id', 'name', 'state')->find($id);
+        $company = Company::select('id', 
+        'name' ,
+        'ruc' ,
+        'correo' ,
+        'business_name' ,
+        'address'  ,
+        'district' ,
+        'province' ,
+        'department' ,
+        'phone' ,
+        'descripcion',
+        'valoration' ,
+        'user_name' ,
+        'password' ,
+        'state'
+        )->find($id);
         return $company;
     }
 
