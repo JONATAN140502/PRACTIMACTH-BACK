@@ -29,8 +29,7 @@ class CompanyResource extends JsonResource
             'valoration' => $this->valoration,
             'user_name' => $this->user_name,
             'password' => $this->password,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'state' => $this->state,
         ];
     }
 }
