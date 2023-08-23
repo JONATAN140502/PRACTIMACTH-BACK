@@ -17,9 +17,9 @@ class KnowledgeResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'descripcion'=>$this->descripcion,
+            'description'=>$this->description,
             'state' => $this->state,
-            'id_subspecialty'=>$this->id_idsubspecialty,
+            'id_subspecialty'=>$this->id_subspecialty,
             'name_subspecialty'=>$this->subspecialty->name,
         ];
     }

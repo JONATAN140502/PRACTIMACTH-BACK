@@ -14,9 +14,9 @@ class Knowledge extends Model
     protected $fillable = [
         'id',
         'name',
-        'descipcion',
+        'description',
         'state',
-        'id_idsubspecialty'
+        'id_subspecialty'
     ];
 
     protected $dates = ['deleted_at'];
