@@ -35,6 +35,33 @@ Route::prefix('area')->group(function (){
     Route::post('/destroy', 'App\Http\Controllers\areaController@destroy')->name('area.destroy');
 
 });
+
+Route::prefix('specialty')->group(function (){
+    Route::get('/', 'App\Http\Controllers\specialtyController@index')->name('specialty.index');
+    Route::post('/store', 'App\Http\Controllers\specialtyController@store')->name('specialty.store');
+    Route::get('/{id}/show', 'App\Http\Controllers\specialtyController@show')->name('specialty.show');
+    Route::post('/update', 'App\Http\Controllers\specialtyController@update')->name('specialty.update');
+    Route::post('/destroy', 'App\Http\Controllers\specialtyController@destroy')->name('specialty.destroy');
+
+});
+
+Route::prefix('subspecialty')->group(function (){
+Route::get('/', 'App\Http\Controllers\subspecialtyController@index')->name('subspecialty.index');
+    Route::post('/store', 'App\Http\Controllers\subspecialtyController@store')->name('subspecialty.store');
+    Route::get('/{id}/show', 'App\Http\Controllers\subspecialtyController@show')->name('subspecialty.show');
+    Route::post('/update', 'App\Http\Controllers\subspecialty@update')->name('subspecialty.update');
+    Route::post('/destroy', 'App\Http\Controllers\subspecialtyController@destroy')->name('subspecialty.destroy');
+
+});
+
+Route::prefix('knowledge')->group(function (){
+    Route::get('/', 'App\Http\Controllers\knowledgeController@index')->name('knowledge.index');
+    Route::post('/store', 'App\Http\Controllers\knowledgeController@store')->name('knowledge.store');
+    Route::get('/{id}/show', 'App\Http\Controllers\knowledgeController@show')->name('knowledge.show');
+    Route::post('/update', 'App\Http\Controllers\knowledgeController@update')->name('knowledge.update');
+    Route::post('/destroy', 'App\Http\Controllers\knowledgeController@destroy')->name('knowledge.destroy');
+
+});
 Route::prefix('faculty')->group(function (){
     Route::get('/', 'App\Http\Controllers\FacultyController@index')->name('faculty.index');
     Route::post('/filter','App\Http\Controllers\FacultyController@filter')->name('faculty.filter');
