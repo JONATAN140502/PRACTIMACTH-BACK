@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Resources\SpecialtyResource;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,16 @@ class SpecialtyController extends Controller
     }
 
     protected function index(Request $request){
-        $Specialty = \App\Models\Specialty::orderBy('name', 'ASC')->get();
+        $Specialty = \App\Models\Specialty::with('area')->orderBy('name', 'ASC')->get();
         $data = SpecialtyResource::collection($Specialty);
         return \response()->json(['data' => $data], 200);
+    }
+
+    protected function filter(Request $request)
+    {
+        $Specialty = \App\Models\Specialty::with('area')->get();
+        $data = SpecialtyResource::collection($Specialty);
+        return response()->json(['data' => $data], 200);
     }
 
     protected function store(Request $request){
@@ -59,8 +67,8 @@ class SpecialtyController extends Controller
 
     protected function show($id)
     {
-        $Specialty = \App\Models\Specialty::select('id','name','descripcion','state')->find($id);;
-        $data = SpecialtyResource::collection(collect([$Specialty]));
+        $Specialty_name = \App\Models\Specialty::with('area')->find($id);
+        $data = SpecialtyResource::collection(collect([$Specialty_name]));
         return $data;
     }
 
