@@ -13,9 +13,16 @@ class SubspecialtyController extends Controller
     }
 
     protected function index(Request $request){
-        $Subspecialty = \App\Models\Subspecialty::orderBy('name', 'ASC')->get();
+        $Subspecialty = \App\Models\Subspecialty::with('specialty.area')->orderBy('name', 'ASC')->get();
         $data = SubspecialtyResource::collection($Subspecialty);
         return \response()->json(['data' => $data], 200);
+    }
+
+    protected function filter(Request $request)
+    {
+        $Subspecialty = \App\Models\Subspecialty::with('specialty')->get();
+        $data = SubspecialtyResource::collection($Subspecialty);
+        return response()->json(['data' => $data], 200);
     }
 
     protected function store(Request $request){
@@ -24,7 +31,7 @@ class SubspecialtyController extends Controller
             $Subspecialty = \App\Models\Subspecialty::create([
                 'name' => strtoupper(trim($request->name)),
                 'descripcion'=>strtoupper(trim($request->descripcion)),
-                'id_area'=>$request->id_area,
+                'id_specialty'=>$request->id_specialty,
                 'state' => 1,
             ]);
             $data[] = $Subspecialty;
@@ -43,7 +50,7 @@ class SubspecialtyController extends Controller
             $SubspecialtyObj= \App\Models\Subspecialty::find($request->id);
             $SubspecialtyObj->name = strtoupper(trim($request->name));
             $SubspecialtyObj->state = strtoupper(trim($request->state));
-            $SubspecialtyObj->id_area=$request->id_area;
+            $SubspecialtyObj->id_specialty=$request->id_specialty;
             $SubspecialtyObj->save();
             $data[] = $SubspecialtyObj;
             $resp = SubspecialtyResource::collection($data);
@@ -59,7 +66,7 @@ class SubspecialtyController extends Controller
 
     protected function show($id)
     {
-        $Subspecialty = \App\Models\Subspecialty::select('id','name','descripcion','state')->find($id);;
+        $Subspecialty = \App\Models\Subspecialty::with('specialty')->find($id);
         $data = SubspecialtyResource::collection(collect([$Subspecialty]));
         return $data;
     }
