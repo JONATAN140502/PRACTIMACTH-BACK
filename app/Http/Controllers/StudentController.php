@@ -14,8 +14,8 @@ class StudentController extends Controller
     protected function index(Request $request)
     {
         $students = Student::with('school.faculty')->orderBy('name', 'ASC')->get();
-       // $data = StudentResource::collection($students);
-        return response()->json(['data' => $students], 200);
+       $data = StudentResource::collection($students);
+        return response()->json(['data' => $data], 200);
     }
 
     protected function store(Request $request)
@@ -52,12 +52,12 @@ class StudentController extends Controller
         }
     }
 
-    protected function update(Request $request, $id)
+    protected function update(Request $request)
     {
         try {
             DB::beginTransaction();
 
-            $student = Student::findOrFail($id);
+            $student = Student::findOrFail($request->id);
 
             // Update the attributes
             $student->name = $request->name;
@@ -98,15 +98,15 @@ class StudentController extends Controller
         return new StudentResource($student);
     }
 
-    protected function destroy($id)
+    protected function destroy(Request $request)
     {
         try {
             DB::beginTransaction();
 
-            Student::where('id', $id)->delete();
+            Student::where('id', $request->id)->delete();
 
             DB::commit();
-            return response()->json(['state' => 0, 'id' => $id], 200);
+            return response()->json(['state' => 0, 'id' => $request->id], 200);
         } catch (Exception $e) {
             DB::rollback();
             return ['state' => '1', 'exception' => (string) $e];

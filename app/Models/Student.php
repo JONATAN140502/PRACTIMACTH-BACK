@@ -18,7 +18,7 @@ class Student extends Model
     protected $dates = ['deleted_at'];
     public function school()
     {
-        return $this->belongsTo(School::class, 'id_school');
+        return $this->belongsTo(\App\Models\School::class, 'id_school');
     }
 
     public function faculty()

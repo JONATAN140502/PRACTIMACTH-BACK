@@ -14,6 +14,7 @@ class Faculty extends Model
 
     public function schools()
     {
-        return $this->hasMany(School::class, 'id_facultie');
+        return $this->hasMany(\App\Models\School::class, 'id_faculty');
     }
+    
 }

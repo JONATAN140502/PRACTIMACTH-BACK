@@ -27,8 +27,11 @@ class StudentResource extends JsonResource
             'state' => $this->state,
             'cicle' => $this->cicle,
             'user_name' => $this->user_name,
-            'password'=>$this->password,
+            'password' => $this->password,
             'last_access' => $this->last_access,
+            'id_faculty' => $this->school->faculty->id,
+            'faculty_name' => $this->school->faculty->name,
+            'school_name' => $this->school->name,
         ];
     }
 }

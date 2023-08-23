@@ -17,10 +17,10 @@ class SchoolResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'code' => $this->code,
+            'code' => $this->code, 
             'state' => $this->state,
-            'id_facultie' => $this->id_facultie,
-            'facultie' => new FacultieResource($this->whenLoaded('facultie')),
+            'id_faculty' => $this->id_faculty,
+            'faculty_name' => $this->faculty->name,
         ];
     }
 }
