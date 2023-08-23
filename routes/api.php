@@ -26,3 +26,12 @@ Route::prefix('company')->group(function (){
     Route::post('/destroy', 'App\Http\Controllers\CompanyController@destroy')->name('company.destroy');
 
 });
+
+Route::prefix('area')->group(function (){
+    Route::get('/', 'App\Http\Controllers\areaController@index')->name('area.index');
+    Route::post('/store', 'App\Http\Controllers\areaController@store')->name('area.store');
+    Route::get('/{id}/show', 'App\Http\Controllers\areaController@show')->name('area.show');
+    Route::post('/update', 'App\Http\Controllers\areaController@update')->name('area.update');
+    Route::post('/destroy', 'App\Http\Controllers\areaController@destroy')->name('area.destroy');
+
+});
