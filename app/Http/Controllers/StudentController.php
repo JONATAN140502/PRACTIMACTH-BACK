@@ -1,0 +1,115 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Student;
+use App\Http\Resources\StudentResource;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
+class StudentController extends Controller
+{
+    protected function index(Request $request)
+    {
+        $students = Student::with('school.faculty')->orderBy('name', 'ASC')->get();
+       // $data = StudentResource::collection($students);
+        return response()->json(['data' => $students], 200);
+    }
+
+    protected function store(Request $request)
+    {
+        $hashedPassword = $request->password;
+
+        try {
+            DB::beginTransaction(); 
+
+            $student = Student::create([
+                'name' => $request->name,
+                'last_name' => $request->last_name,
+                'code' => $request->code,
+                'dni' => $request->dni,
+                'correo' => $request->correo,
+                'phone' => $request->phone,
+                'id_school' => $request->id_school,
+                'skills' => $request->skills,
+                'state' => $request->state,
+                'cicle' => $request->cicle,
+                'user_name' => $request->user_name,
+                'password' => Hash::make($hashedPassword),
+                'last_access' => now(), // Assuming you want to set the current time
+            ]);
+
+            $data[] = $student;
+            $resp = StudentResource::collection($data);
+
+            DB::commit();
+            return response()->json(['state' => 0, 'data' => $resp], 200);
+        } catch (Exception $e) {
+            DB::rollback();
+            return ['state' => '1', 'exception' => (string) $e];
+        }
+    }
+
+    protected function update(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $student = Student::findOrFail($id);
+
+            // Update the attributes
+            $student->name = $request->name;
+            $student->last_name = $request->last_name;
+            $student->code = $request->code;
+            $student->dni = $request->dni;
+            $student->correo = $request->correo;
+            $student->phone = $request->phone;
+            $student->id_school = $request->id_school;
+            $student->skills = $request->skills;
+            $student->state = $request->state;
+            $student->cicle = $request->cicle;
+            $student->user_name = $request->user_name;
+
+            // Check if password is provided and update if needed
+            if ($request->has('password')) {
+                $hashedPassword = $request->password;
+                $student->password = Hash::make($hashedPassword);
+            }
+
+            $student->last_access = now();
+            $student->save();
+
+            $data[] = $student;
+            $resp = StudentResource::collection($data);
+
+            DB::commit();
+            return response()->json(['state' => 0, 'data' => $resp], 200);
+        } catch (Exception $e) {
+            DB::rollback();
+            return ['state' => '1', 'exception' => (string) $e];
+        }
+    }
+
+    protected function show($id)
+    {
+        $student = Student::find($id);
+        return new StudentResource($student);
+    }
+
+    protected function destroy($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            Student::where('id', $id)->delete();
+
+            DB::commit();
+            return response()->json(['state' => 0, 'id' => $id], 200);
+        } catch (Exception $e) {
+            DB::rollback();
+            return ['state' => '1', 'exception' => (string) $e];
+        }
+    }
+}

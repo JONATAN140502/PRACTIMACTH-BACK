@@ -5,7 +5,7 @@ use App\Models\Company;
 use App\Http\Resources\CompanyResource;
 use Exception;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Str;
 // use Uuid;
 
 class CompanyController extends Controller
@@ -22,7 +22,7 @@ class CompanyController extends Controller
     }
 
     protected function store(Request $request)
-    {
+    {    $hashedPassword = $request->password;
         try {
             DB::beginTransaction();
             $company = Company::create([
@@ -38,7 +38,7 @@ class CompanyController extends Controller
             'descripcion' => $request->descripcion,
             'valoration' => $request->valoration,
             'user_name' => $request->user_name,
-            'password' => $request->password,
+            'password' =>bcrypt($hashedPassword),
             'state' => 1,  // Assuming you have a default state value
             ]);
             $data[] = $company;
@@ -69,7 +69,8 @@ class CompanyController extends Controller
         $companyObj->descripcion = strtoupper(trim($request->descripcion));
         $companyObj->valoration = trim($request->valoration);
         $companyObj->user_name = trim($request->user_name);
-        $companyObj->password = trim($request->password);
+        $hashedPassword = $request->password;
+        $companyObj->password = bcrypt($hashedPassword);
         $companyObj->state = trim($request->state);
         $companyObj->save();
 
