@@ -10,10 +10,10 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 
 class SchoolController extends Controller
-{
+{ 
     protected function index(Request $request)
     {
-        $schools = School::orderBy('name', 'ASC')->get();
+        $schools = School::with('faculty')->orderBy('name', 'ASC')->get();
         $data = SchoolResource::collection($schools);
         return response()->json(['data' => $data], 200);
     }
@@ -27,7 +27,7 @@ class SchoolController extends Controller
                 'name' => $request->name,
                 'code' => $request->code,
                 'state' => $request->state,
-                'id_facultie' => $request->id_facultie,
+                'id_faculty' => $request->id_faculty,
             ]);
 
             $data[] = $school;
@@ -41,17 +41,17 @@ class SchoolController extends Controller
         }
     }
 
-    protected function update(Request $request, $id)
+    protected function update(Request $request)
 {
     try {
         DB::beginTransaction();
 
-        $school = School::findOrFail($id);
+        $school = School::findOrFail($request->id);
 
         $school->name = $request->name;
         $school->code = $request->code;
         $school->state = $request->state;
-        $school->id_facultie = $request->id_facultie;
+        $school->id_faculty = $request->id_faculty;
 
         $school->save();
 
@@ -73,15 +73,15 @@ class SchoolController extends Controller
         return new SchoolResource($school);
     }
 
-    protected function destroy($id)
+    protected function destroy(Request $request)
     {
         try {
             DB::beginTransaction();
 
-            School::where('id', $id)->delete();
+            School::where('id', $request->id)->delete();
 
             DB::commit();
-            return response()->json(['state' => 0, 'id' => $id], 200);
+            return response()->json(['state' => 0, 'id' => $request->id], 200);
         } catch (Exception $e) {
             DB::rollback();
             return ['state' => '1', 'exception' => (string) $e];

@@ -41,12 +41,12 @@ class FacultyController extends Controller
         }
     }
 
-    protected function update(Request $request, $id)
+    protected function update(Request $request)
     {
         try {
             DB::beginTransaction();
     
-            $faculty = Faculty::findOrFail($id);
+            $faculty = Faculty::findOrFail($request->id);
     
             $faculty->code = $request->code;
             $faculty->name = $request->name;
@@ -72,15 +72,15 @@ class FacultyController extends Controller
         return new FacultyResource($faculty);
     }
     
-    protected function destroy($id)
+    protected function destroy(Request $request)
     {
         try {
             DB::beginTransaction();
     
-            Faculty::where('id', $id)->delete();
+            Faculty::where('id', $request->id)->delete();
     
             DB::commit();
-            return response()->json(['state' => 0, 'id' => $id], 200);
+            return response()->json(['state' => 0, 'id' => $request->id], 200);
         } catch (Exception $e) {
             DB::rollback();
             return ['state' => '1', 'exception' => (string) $e];
