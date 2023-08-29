@@ -98,3 +98,12 @@ Route::prefix('user')->group(function (){
     Route::post('/destroy', 'App\Http\Controllers\UserController@destroy')->name('user.destroy');
 
 });
+
+Route::prefix('practice')->group(function (){
+    Route::get('/', 'App\Http\Controllers\practiceController@index')->name('practice.index');
+    Route::post('/store', 'App\Http\Controllers\practiceController@store')->name('practice.store');
+    Route::get('/{id}/show', 'App\Http\Controllers\practiceController@show')->name('practice.show');
+    Route::post('/update', 'App\Http\Controllers\practiceController@update')->name('practice.update');
+    Route::post('/destroy', 'App\Http\Controllers\practiceController@destroy')->name('practice.destroy');
+
+});
