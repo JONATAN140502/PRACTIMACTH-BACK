@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Knowledges_student;
 use App\Http\Resources\StudentResource;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -102,11 +103,32 @@ class StudentController extends Controller
     {
         try {
             DB::beginTransaction();
-
+            // desactivar el estudiante
             Student::where('id', $request->id)->delete();
 
+           //desactivar su conocimiento del estudiante 
+            $Knowledges_student= \App\Models\Knowledges_student::where('id_student', $request->id_student)->delete();
+           
             DB::commit();
             return response()->json(['state' => 0, 'id' => $request->id], 200);
+           
+        } catch (Exception $e) {
+            DB::rollback();
+            return ['state' => '1', 'exception' => (string) $e];
+        }
+    }
+    protected function storeknowledge(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $knowledge_student=Knowledges_student::create([ 
+              'state'=>1,
+              'id_student'=> $request->id_student,
+              'id_knowledges'=> $request->id_knowledges,
+            ]);
+            DB::commit();
+            return response()->json(['state' => 0, 'data' =>$knowledge_student], 200);
         } catch (Exception $e) {
             DB::rollback();
             return ['state' => '1', 'exception' => (string) $e];
