@@ -18,8 +18,8 @@ class KnowledgeController extends Controller
     }
 
     protected function filter(Request $request)
-    {
-        $Knowledge = \App\Models\Knowledge::with('subspecialty')->get();
+    {   
+        $Knowledge = \App\Models\Knowledge::with('subspecialty')->where('id_subspecialty',$request->filter_subspecialty_id)->get();
         $data = KnowledgeResource::collection($Knowledge);
         return response()->json(['data' => $data], 200);
     }

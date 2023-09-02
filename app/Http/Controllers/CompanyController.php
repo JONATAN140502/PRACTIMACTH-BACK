@@ -113,6 +113,13 @@ class CompanyController extends Controller
     {
         try {
             DB::beginTransaction();
+            //buscar dentro de la tabla las areas relacionadas a la compañia
+            $data_areas_of_company = \App\Models\Areas_company::where('id_company',$request->filter_company_id)->get();
+            foreach ($data_areas_of_company as $area) {
+                Areas_company::where('id_area', $area->id)->delete(); //borrar el area relacionada
+                DB::commit();
+            }
+            //borrar compañia
             Company::where('id', $request->id)->delete();
             DB::commit();
             return response()->json(['state' => 0, 'id' => $request->id], 200);
@@ -122,6 +129,8 @@ class CompanyController extends Controller
             return ['state' => '1', 'exception' => (string) $e];
         }
     }
+
+    //  Insetar en la tabla relacional area_company
     protected function storearea(Request $request)
     {
         try {
@@ -139,4 +148,5 @@ class CompanyController extends Controller
             return ['state' => '1', 'exception' => (string) $e];
         }
     }
+    
 }
