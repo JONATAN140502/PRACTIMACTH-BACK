@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\Areas_company;
 use App\Http\Resources\CompanyResource;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -116,6 +117,23 @@ class CompanyController extends Controller
             DB::commit();
             return response()->json(['state' => 0, 'id' => $request->id], 200);
 
+        } catch (Exception $e) {
+            DB::rollback();
+            return ['state' => '1', 'exception' => (string) $e];
+        }
+    }
+    protected function storearea(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $area_company=Areas_company::create([ 
+              'state'=>1,
+              'id_company'=> $request->id_company,
+              'id_area'=> $request->id_area,
+            ]);
+            DB::commit();
+            return response()->json(['state' => 0, 'data' =>$area_company], 200);
         } catch (Exception $e) {
             DB::rollback();
             return ['state' => '1', 'exception' => (string) $e];

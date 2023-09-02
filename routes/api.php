@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::prefix('company')->group(function (){
     Route::get('/', 'App\Http\Controllers\CompanyController@index')->name('company.index');
-    Route::post('/filter','App\Http\Controllers\CompanyController@filter')->name('company.filter');
+    Route::post('/storearea','App\Http\Controllers\CompanyController@storearea')->name('company.storearea');
     Route::post('/store', 'App\Http\Controllers\CompanyController@store')->name('company.store');
     Route::get('/{id}/show', 'App\Http\Controllers\CompanyController@show')->name('company.show');
     Route::post('/update', 'App\Http\Controllers\CompanyController@update')->name('company.update');
@@ -87,7 +87,7 @@ Route::prefix('student')->group(function (){
     Route::get('/{id}/show', 'App\Http\Controllers\StudentController@show')->name('student.show');
     Route::post('/update', 'App\Http\Controllers\StudentController@update')->name('student.update');
     Route::post('/destroy', 'App\Http\Controllers\StudentController@destroy')->name('student.destroy');
-
+    Route::post('/storeknowledge', 'App\Http\Controllers\StudentController@storeknowledge')->name('student.storeknowledge');
 });
 Route::prefix('user')->group(function (){
     Route::get('/', 'App\Http\Controllers\UserController@index')->name('user.index');
