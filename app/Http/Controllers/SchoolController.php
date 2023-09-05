@@ -18,6 +18,13 @@ class SchoolController extends Controller
         return response()->json(['data' => $data], 200);
     }
 
+    protected function filter(Request $request)
+    {   
+        $School = \App\Models\School::with('faculty')->where('id_faculty',$request->filter_faculty_id)->get();
+        $data = SchoolResource::collection($School);
+        return response()->json(['data' => $data], 200);
+    }
+
     protected function store(Request $request)
     {
         try {
@@ -47,14 +54,11 @@ class SchoolController extends Controller
         DB::beginTransaction();
 
         $school = School::findOrFail($request->id);
-
         $school->name = $request->name;
         $school->code = $request->code;
         $school->state = $request->state;
         $school->id_faculty = $request->id_faculty;
-
         $school->save();
-
         $data[] = $school;
         $resp = SchoolResource::collection($data);
 
@@ -65,7 +69,6 @@ class SchoolController extends Controller
         return ['state' => '1', 'exception' => (string) $e];
     }
 }
-
 
     protected function show($id)
     {
