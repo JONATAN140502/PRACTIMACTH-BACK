@@ -40,7 +40,7 @@ class CompanyController extends Controller
             'valoration' => $request->valoration,
             'user_name' => $request->user_name,
             'password' =>bcrypt($hashedPassword),
-            'state' => 1,  // Assuming you have a default state value
+            'state' =>1
             ]);
             $data[] = $company;
             $resp = CompanyResource::collection($data);
