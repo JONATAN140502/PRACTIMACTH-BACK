@@ -22,23 +22,14 @@ class MatchController extends Controller
         
         $list_idPractices = [];
         for ($i=0; $i < count($similitudes_practicas); $i++) { 
-            $list_idPractices[]=$similitudes_practicas[0][0]['id'];
-        }
-        
-
-        /*foreach ($similitudes_practicas as $value->id_practice) {
-            if (!in_array($value->id_practice, $list_idPractices)) {
-                //si no pertenece a la lista, agregar
-                $list_idPractices[] = $value->id_practice;
+            if(!in_array($similitudes_practicas[$i][0]['id_practice'], $list_idPractices)){
+                $list_idPractices[]=$similitudes_practicas[$i][0]['id_practice'];
             }
-        }*/
-        /*queda una lista con id de practices
-        $list_knowledge_filter = [];
-        $cant = 0;
+            
+        }
 
-        $cant_repeticiones = array_count_values($similitudes_practicas);
-
-        foreach ($cant_repeticiones as $key) {
+        $cant_repeticiones = array_count_values($list_idPractices);///ARREGLAAAAAR
+        /*foreach ($cant_repeticiones as $key) {
             if ($key[1] == $cant_conocimientos || $key[1] >= $cant_conocimientos - 2) {
                 $list_knowledge_filter[] = $key[0]; //retornar una lista con los id de las practicas qeu hace match
             }

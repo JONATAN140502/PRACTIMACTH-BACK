@@ -15,7 +15,7 @@ class AreaController extends Controller
     }*/
 
     protected function index(Request $request){
-        $area = \App\Models\Area::where('state', 1)->orderBy('name', 'ASC')->get();
+        $area = Area::where('state', 1)->orderBy('name', 'ASC')->get();
         $data = AreaResource::collection($area);
         return \response()->json(['data' => $data], 200);
     }
@@ -23,7 +23,7 @@ class AreaController extends Controller
     protected function store(Request $request){
         try{
             \DB::beginTransaction();
-            $area = \App\Models\Area::create([
+            $area = Area::create([
                 'name' => strtoupper(trim($request->name)),
                 'descripcion'=>strtoupper(trim($request->descripcion)),
                 'state' => 1,
@@ -41,7 +41,7 @@ class AreaController extends Controller
 
     protected function update(Request $request){
         try{
-            $areaObj= \App\Models\Area::find($request->id);
+            $areaObj= Area::find($request->id);
             $areaObj->name = strtoupper(trim($request->name));
             $areaObj->state = strtoupper(trim($request->state));
             $areaObj->save();
@@ -59,7 +59,7 @@ class AreaController extends Controller
 
     protected function show($id)
     {
-        $area = \App\Models\Area::select('id','name','descripcion','state')->find($id);;
+        $area = Area::select('id','name','descripcion','state')->find($id);;
         $data = AreaResource::collection(collect([$area]));
         return $data;
     }
@@ -67,7 +67,7 @@ class AreaController extends Controller
     protected function destroy(Request $request){
         try {
             \DB::beginTransaction();
-            $area = \App\Models\Area::where('id', $request->id)->delete();
+            $area = Area::where('id', $request->id)->delete();
             \DB::commit();
             return \response()->json(['state' => 0, 'id' => $request->id], 200);
 
