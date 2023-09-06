@@ -106,3 +106,8 @@ Route::prefix('practice')->group(function (){
     Route::post('/destroy', 'App\Http\Controllers\practiceController@destroy')->name('practice.destroy');
 
 });
+Route::prefix('consulta')->group(function (){
+    Route::post('/dni', 'App\Http\Controllers\ApiController@dni')->name('consulta.dni');
+    Route::post('/ruc', 'App\Http\Controllers\ApiController@ruc')->name('consulta.ruc');
+
+});
