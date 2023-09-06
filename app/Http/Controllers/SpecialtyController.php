@@ -16,7 +16,7 @@ class SpecialtyController extends Controller
 
     protected function filter(Request $request)
     {
-        $Specialty = \App\Models\Specialty::with('area')->get();
+        $Specialty = \App\Models\Specialty::with('area')->where('id_area',$request->filter_area_id)->get();
         $data = SpecialtyResource::collection($Specialty);
         return response()->json(['data' => $data], 200);
     }
