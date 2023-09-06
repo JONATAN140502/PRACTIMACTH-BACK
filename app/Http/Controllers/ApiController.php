@@ -9,22 +9,23 @@ class ApiController extends Controller
 
     protected function dni(Request $request){
         try{
-            $url = 'https://api.apis.net.pe/v1/dni?numero=' . $request->documento;
-            $token = 'apis-token-3372.azsOLY3QmzDwBvXMKCFwIvMv9pacMcW8';
-            $curl = curl_init();
-    
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-                CURLOPT_HTTPHEADER => array(
-                    'Authorization: Bearer ' . $token
-                ),
-            ));
+            $app_ley="pachasc@22";
+                    $token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1ycDExMDc5M0BnbWFpbC5jb20ifQ.QvHfD1vV7aEB50mV7P_VdmyHvPO_Qrga34thSdQ-WIs";
+                    $host="http://www.consultasapi.devmiguelrevilla.com/api/test/".$request->documento.'/'.$token;
+                    $curl = curl_init();
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => $host,
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => "",
+                        CURLOPT_TIMEOUT => 30000,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => "GET",
+                        CURLOPT_HTTPHEADER => array(
+                            // Set Here Your Requesred Headers
+                            'Content-Type: application/json',
+                            'x-api-key: '.$app_ley
+                        ),
+                    ));
             
             $response = curl_exec($curl);
             $err = curl_error($curl);
@@ -34,23 +35,10 @@ class ApiController extends Controller
             if ($err) {
                 return \response()->json(['state' => 1, 'exception' => $err], 200);
             } else {
-                $data = json_decode($response, true); // Decodificar la respuesta JSON
+                $data = json_decode($response, true); 
+
     
-                // Extraer los valores necesarios
-                $nombre = $data['nombres'];
-                $apellidoPaterno = $data['apellidoPaterno'];
-                $apellidoMaterno = $data['apellidoMaterno'];
-                $dni = $data['numeroDocumento'];
-    
-                // Crear la cadena de datos en el formato deseado
-                $formattedData = [
-                    'nombre' => $nombre,
-                    'apellidoPaterno' => $apellidoPaterno,
-                    'apellidoMaterno' => $apellidoMaterno,
-                    'dni' => $dni,
-                ];
-    
-                return \response()->json(['state' => 0, 'data' => $formattedData], 200);
+                return \response()->json(['state' => 0, 'data' => $data], 200);
             }
         } catch (Exception $err) {
             return ['state' => '1', 'exception' => (string) $err];
