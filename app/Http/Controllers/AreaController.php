@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class AreaController extends Controller
 {
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
 
     protected function index(Request $request){
         $area = \App\Models\Area::where('state', 1)->orderBy('name', 'ASC')->get();

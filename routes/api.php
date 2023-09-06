@@ -55,7 +55,7 @@ Route::get('/', 'App\Http\Controllers\subspecialtyController@index')->name('subs
 });
 
 Route::prefix('knowledge')->group(function (){
-    Route::get('/', 'App\Http\Controllers\knowledgeController@index')->name('knowledge.index');
+    Route::get('/', 'App\Http\Controllers\KnowledgeController@index')->name('knowledge.index');
     Route::post('/store', 'App\Http\Controllers\knowledgeController@store')->name('knowledge.store');
     Route::get('/{id}/show', 'App\Http\Controllers\knowledgeController@show')->name('knowledge.show');
     Route::post('/update', 'App\Http\Controllers\knowledgeController@update')->name('knowledge.update');

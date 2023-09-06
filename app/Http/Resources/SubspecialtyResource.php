@@ -20,7 +20,7 @@ class SubspecialtyResource extends JsonResource
             'descripcion'=>$this->descripcion,
             'state' => $this->state,
             'id_specialty'=>$this->id_specialty,
-            'name_specialty'=>$this->specialty->name,
+            //'name_specialty'=>$this->specialty->name,
         ];
     }
 }

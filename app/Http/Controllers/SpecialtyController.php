@@ -1,17 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
 use App\Http\Resources\SpecialtyResource;
 use Illuminate\Http\Request;
 
 class SpecialtyController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
 
     protected function index(Request $request){
         $Specialty = \App\Models\Specialty::with('area')->orderBy('name', 'ASC')->get();

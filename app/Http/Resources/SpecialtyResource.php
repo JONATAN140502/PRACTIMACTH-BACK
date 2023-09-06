@@ -20,7 +20,7 @@ class SpecialtyResource extends JsonResource
             'descripcion'=>$this->descripcion,
             'state' => $this->state,
             'id_area'=>$this->id_area,
-            'name_area'=>$this->area->name,
+            //'name_area'=>$this->area->name,
         ];
     }
 }

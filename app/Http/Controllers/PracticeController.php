@@ -6,10 +6,7 @@ use Illuminate\Http\Request;
 
 class PracticeController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
 
     protected function index(Request $request){
         $Practice = \App\Models\Practice::with('company')->orderBy('name', 'ASC')->get();

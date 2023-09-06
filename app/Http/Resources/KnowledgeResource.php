@@ -20,7 +20,7 @@ class KnowledgeResource extends JsonResource
             'description'=>$this->description,
             'state' => $this->state,
             'id_subspecialty'=>$this->id_subspecialty,
-            'name_subspecialty'=>$this->subspecialty->name,
+            #'name_subspecialty'=>$this->subspecialty->name,
         ];
     }
 }

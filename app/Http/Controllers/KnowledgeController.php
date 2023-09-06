@@ -1,20 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Resources\KnowledgeResource;
 use Illuminate\Http\Request;
 
 class KnowledgeController extends Controller
 {
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
 
     protected function index(Request $request){
         $Knowledge = \App\Models\Knowledge::with('subspecialty.specialty.area')->orderBy('name', 'ASC')->get();
         $data = KnowledgeResource::collection($Knowledge);
         return \response()->json(['data' => $data], 200);
+        
     }
 
     protected function filter(Request $request)
