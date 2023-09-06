@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Knowledge_practice extends Model
+class KnowledgePractice extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
@@ -17,4 +17,12 @@ class Knowledge_practice extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function knowledge()
+    {
+        return $this->belongsTo(\App\Models\Knowledge::class);
+    }
+    public function practice()
+    {
+        return $this->belongsTo(\App\Models\Practice::class);
+    }
 }

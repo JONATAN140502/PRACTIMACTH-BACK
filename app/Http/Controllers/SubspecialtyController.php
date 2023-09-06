@@ -16,7 +16,7 @@ class SubspecialtyController extends Controller
 
     protected function filter(Request $request)
     {
-        $Subspecialty = \App\Models\SubSpecialty::with('specialty')->get();
+        $Subspecialty = \App\Models\SubSpecialty::with('specialty')->where('id_specialty',$request->filter_specialty_id)->get();
         $data = SubspecialtyResource::collection($Subspecialty);
         return response()->json(['data' => $data], 200);
     }

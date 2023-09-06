@@ -21,6 +21,10 @@ Route::prefix('/login')->group( function (){
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::prefix('match')->group(function (){
+    Route::post('/filterPractices', 'App\Http\Controllers\matchController@filterPractices')->name('match.filterPractices');
+
+});
 Route::prefix('company')->group(function (){
     Route::get('/', 'App\Http\Controllers\CompanyController@index')->name('company.index');
     Route::post('/storearea','App\Http\Controllers\CompanyController@storearea')->name('company.storearea');
@@ -43,6 +47,7 @@ Route::prefix('area')->group(function (){
 Route::prefix('specialty')->group(function (){
     Route::get('/', 'App\Http\Controllers\specialtyController@index')->name('specialty.index');
     Route::post('/store', 'App\Http\Controllers\specialtyController@store')->name('specialty.store');
+    Route::post('/filter', 'App\Http\Controllers\specialtyController@filter')->name('specialty.filter');
     Route::get('/{id}/show', 'App\Http\Controllers\specialtyController@show')->name('specialty.show');
     Route::post('/update', 'App\Http\Controllers\specialtyController@update')->name('specialty.update');
     Route::post('/destroy', 'App\Http\Controllers\specialtyController@destroy')->name('specialty.destroy');
@@ -50,8 +55,9 @@ Route::prefix('specialty')->group(function (){
 });
 
 Route::prefix('subspecialty')->group(function (){
-Route::get('/', 'App\Http\Controllers\subspecialtyController@index')->name('subspecialty.index');
+    Route::get('/', 'App\Http\Controllers\subspecialtyController@index')->name('subspecialty.index');
     Route::post('/store', 'App\Http\Controllers\subspecialtyController@store')->name('subspecialty.store');
+    Route::post('/filter', 'App\Http\Controllers\subspecialtyController@filter')->name('subpecialty.filter');
     Route::get('/{id}/show', 'App\Http\Controllers\subspecialtyController@show')->name('subspecialty.show');
     Route::post('/update', 'App\Http\Controllers\subspecialty@update')->name('subspecialty.update');
     Route::post('/destroy', 'App\Http\Controllers\subspecialtyController@destroy')->name('subspecialty.destroy');
@@ -61,6 +67,7 @@ Route::get('/', 'App\Http\Controllers\subspecialtyController@index')->name('subs
 Route::prefix('knowledge')->group(function (){
     Route::get('/', 'App\Http\Controllers\KnowledgeController@index')->name('knowledge.index');
     Route::post('/store', 'App\Http\Controllers\knowledgeController@store')->name('knowledge.store');
+    Route::post('/filter', 'App\Http\Controllers\knowledgeController@filter')->name('knowledge.filter');
     Route::get('/{id}/show', 'App\Http\Controllers\knowledgeController@show')->name('knowledge.show');
     Route::post('/update', 'App\Http\Controllers\knowledgeController@update')->name('knowledge.update');
     Route::post('/destroy', 'App\Http\Controllers\knowledgeController@destroy')->name('knowledge.destroy');

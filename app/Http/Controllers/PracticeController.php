@@ -9,7 +9,7 @@ class PracticeController extends Controller
     
 
     protected function index(Request $request){
-        $Practice = \App\Models\Practice::with('company')->orderBy('name', 'ASC')->get();
+        $Practice = \App\Models\Practice::with('company')->orderBy('id', 'ASC')->get();
         $data = PracticeResource::collection($Practice);
         return \response()->json(['data' => $data], 200);
     }
@@ -24,9 +24,9 @@ class PracticeController extends Controller
 
     protected function store(Request $request){
         try {
-            DB::beginTransaction();
+            \DB::beginTransaction();
 
-            $practice = Faculty::create([
+            $practice = \App\Models\Practice::create([
                 'name' => $request->name,
                 'date' => $request->date,
                 'modalidad' => $request->modalidad,
@@ -40,16 +40,17 @@ class PracticeController extends Controller
             ]);
             //Registar en la tabla relacional Knowledge
             $knowledges = $request->knowledges;
-            foreach ($knowledges as $value) {
-                Knowledge_practice::create([
+            $knowledges_array=explode(", ", $knowledges);
+            foreach ($knowledges_array as $value) {
+                \App\Models\Knowledge_practice::create([
                     'id_knowledges'=>$value,
                     'id_practice'=>$practice->id,
                 ]);
             }
-            DB::commit();
+            \DB::commit();
             return response()->json(['state' => 0], 200);
         } catch (Exception $e) {
-            DB::rollback();
+            \DB::rollback();
             return ['state' => '1', 'exception' => (string) $e];
         }
     }

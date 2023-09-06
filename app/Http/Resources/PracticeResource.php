@@ -25,7 +25,7 @@ class PracticeResource extends JsonResource
             'workload'=>$this->workload,
             'vacant'=>$this->vacant,
             'id_company'=>$this->id_company,
-            'name_company'=>$this->company->name,
+            #'name_company'=>$this->company->name,
             'views'=>$this->views,
 
         ];

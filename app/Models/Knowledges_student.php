@@ -13,5 +13,14 @@ class Knowledges_student extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function knowledge()
+    {
+        return $this->belongsTo(\App\Models\Knowledge::class);
+    }
+
+    public function studiant()
+    {
+        return $this->belongsTo(\App\Models\Student::class);
+    }
 
 }
