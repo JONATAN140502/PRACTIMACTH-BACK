@@ -15,7 +15,7 @@ class Knowledges_student extends Model
 
     public function knowledge()
     {
-        return $this->belongsTo(\App\Models\Knowledge::class);
+        return $this->belongsTo(\App\Models\Knowledge::class,'id_knowledges');
     }
 
     public function studiant()

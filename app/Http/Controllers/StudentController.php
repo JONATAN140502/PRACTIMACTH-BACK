@@ -34,8 +34,8 @@ class StudentController extends Controller
                 'correo' => $request->correo,
                 'phone' => $request->phone,
                 'id_school' => $request->id_school,
-                'skills' => $request->skills,
-                'state' => $request->state,
+                'skills' => $request->skills, //viene como aaray
+                'state' => 1,
                 'cicle' => $request->cicle,
                 'user_name' => $request->user_name,
                 'password' => Hash::make($hashedPassword),
@@ -134,4 +134,5 @@ class StudentController extends Controller
             return ['state' => '1', 'exception' => (string) $e];
         }
     }
+    
 }

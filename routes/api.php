@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::prefix('match')->group(function (){
     Route::post('/filterPractices', 'App\Http\Controllers\matchController@filterPractices')->name('match.filterPractices');
+    Route::post('/filterKnowledge', 'App\Http\Controllers\matchController@filterKnowledge')->name('match.filterKnowledge');
 
 });
 Route::prefix('company')->group(function (){
