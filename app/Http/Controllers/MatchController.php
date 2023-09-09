@@ -20,7 +20,7 @@ class MatchController extends Controller
             $similitudes_practicas[] = $Knowledge_practices;
         }
         
-        $list_idPractices = [];
+        $list_idPractices = []; //lista sin ser duplicados
         for ($i=0; $i < count($similitudes_practicas); $i++) { 
             if(!in_array($similitudes_practicas[$i][0]['id_practice'], $list_idPractices)){
                 $list_idPractices[]=$similitudes_practicas[$i][0]['id_practice'];
