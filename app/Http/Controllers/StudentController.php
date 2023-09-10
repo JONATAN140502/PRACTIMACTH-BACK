@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Knowledges_student;
-use App\Http\Resources\StudentResource;
+use App\Http\Resources\{StudentResource, KnowledgesStudentResource};
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -133,6 +133,13 @@ class StudentController extends Controller
             DB::rollback();
             return ['state' => '1', 'exception' => (string) $e];
         }
+    }
+
+    protected function filterKnowledge(Request $request)
+    {   
+        $Knowledge = Knowledges_student::with('studiant')->where('id_student',$request->filter_student)->get();
+        $respuesta=KnowledgesStudentResource::collection($Knowledge);
+        return response()->json(['data' => $respuesta], 200);
     }
     
 }

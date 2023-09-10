@@ -94,4 +94,6 @@ class PracticeController extends Controller
             return ['state' => '1', 'exception' => (string) $e];
         }
     }
+
+    
 }

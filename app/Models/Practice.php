@@ -28,6 +28,6 @@ class Practice extends Model
 
     public function company()
     {
-        return $this->belongsTo(\App\Models\Company::class);
+        return $this->belongsTo(\App\Models\Company::class,'id_company');
     }
 }

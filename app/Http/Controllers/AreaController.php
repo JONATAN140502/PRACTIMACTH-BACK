@@ -59,7 +59,7 @@ class AreaController extends Controller
 
     protected function show($id)
     {
-        $area = Area::select('id','name','descripcion','state')->find($id);;
+        $area = Area::select('id','name','descripcion','state')->find($id);
         $data = AreaResource::collection(collect([$area]));
         return $data;
     }

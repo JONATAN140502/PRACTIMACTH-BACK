@@ -1,8 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Company;
-use App\Models\Areas_company;
+use App\Models\{Company,Areas_company,area};
 use App\Http\Resources\CompanyResource;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -90,7 +89,7 @@ class CompanyController extends Controller
 
     protected function show($id)
     {
-        $company = Company::select('id', 
+        $company = Company::select( 
         'name' ,
         'ruc' ,
         'correo' ,
@@ -101,12 +100,17 @@ class CompanyController extends Controller
         'department' ,
         'phone' ,
         'descripcion',
-        'valoration' ,
-        'user_name' ,
-        'password' ,
-        'state'
+        'valoration' 
         )->find($id);
-        return $company;
+        $data_areas_of_company = Areas_company::where('id_company',$id)->get();
+        $areas=[];
+        foreach ($data_areas_of_company as $key) {
+            $area=Area::select('name')->find($key['id_area']);
+            $areas[]=$area['name'];
+
+        }
+
+        return response()->json(['state' => 0, 'company' => $company,'areas'=>$areas], 200);
     }
 
     protected function destroy(Request $request)
@@ -115,8 +119,8 @@ class CompanyController extends Controller
             DB::beginTransaction();
             //buscar dentro de la tabla las areas relacionadas a la compañia
             $data_areas_of_company = \App\Models\Areas_company::where('id_company',$request->filter_company_id)->get();
-            foreach ($data_areas_of_company as $area) {
-                Areas_company::where('id_area', $area->id)->delete(); //borrar el area relacionada
+            foreach ($data_areas_of_company as $relacion) {
+                Areas_company::where('id', $relacion->id)->delete(); //borrar el area relacionada
                 DB::commit();
             }
             //borrar compañia
@@ -132,7 +136,7 @@ class CompanyController extends Controller
 
     //  Insetar en la tabla relacional area_company
     protected function storearea(Request $request)
-    {
+    {  
         try {
             DB::beginTransaction();
 

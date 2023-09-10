@@ -27,4 +27,9 @@ class company extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function practice()
+    {
+        return $this->hasMany(Practice::class);
+    }
 }

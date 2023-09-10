@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::prefix('match')->group(function (){
     Route::post('/filterPractices', 'App\Http\Controllers\matchController@filterPractices')->name('match.filterPractices');
-    Route::post('/filterKnowledge', 'App\Http\Controllers\matchController@filterKnowledge')->name('match.filterKnowledge');
+    
 
 });
 Route::prefix('company')->group(function (){
@@ -100,6 +100,7 @@ Route::prefix('student')->group(function (){
     Route::post('/update', 'App\Http\Controllers\StudentController@update')->name('student.update');
     Route::post('/destroy', 'App\Http\Controllers\StudentController@destroy')->name('student.destroy');
     Route::post('/storeknowledge', 'App\Http\Controllers\StudentController@storeknowledge')->name('student.storeknowledge');
+    Route::post('/filterKnowledge', 'App\Http\Controllers\StudentController@filterKnowledge')->name('student.filterKnowledge');
 });
 Route::prefix('user')->group(function (){
     Route::get('/', 'App\Http\Controllers\UserController@index')->name('user.index');
