@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\{Practice, KnowledgePractice };
 use App\Http\Resources\PracticeResource;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class PracticeController extends Controller
     //Pasar los distintos tipos de filtros
     protected function filter(Request $request)
     {
-        $Practice = \App\Models\Practice::with('company')->where('.$request->labelFilter.',$request->filter)->get();
+        $Practice = \App\Models\Practice::with('company')->where($request->labelFilter,$request->filter)->get();
         $data = PracticeResource::collection($Practice);
         return response()->json(['data' => $data], 200);
     }
@@ -26,7 +27,7 @@ class PracticeController extends Controller
         try {
             \DB::beginTransaction();
 
-            $practice = \App\Models\Practice::create([
+            $practice = Practice::create([
                 'name' => $request->name,
                 'date' => $request->date,
                 'modalidad' => $request->modalidad,
@@ -42,7 +43,7 @@ class PracticeController extends Controller
             $knowledges = $request->knowledges;
             $knowledges_array=explode(", ", $knowledges);
             foreach ($knowledges_array as $value) {
-                \App\Models\Knowledge_practice::create([
+                KnowledgePractice::create([
                     'id_knowledges'=>$value,
                     'id_practice'=>$practice->id,
                 ]);
@@ -93,6 +94,19 @@ class PracticeController extends Controller
             DB::rollback();
             return ['state' => '1', 'exception' => (string) $e];
         }
+    }
+    protected function destroy(Request $request){
+        try {
+            \DB::beginTransaction();
+            Practice::where('id', $request->id)->delete();
+            \DB::commit();
+            return \response()->json(['state' => 0, 'id' => $request->id], 200);
+
+        } catch (Exception $e) {
+            \DB::rollback();
+            return ['state' => '1', 'exception' => (string) $e];
+        }
+
     }
 
     
