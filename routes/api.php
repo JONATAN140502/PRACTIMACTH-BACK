@@ -23,7 +23,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::prefix('match')->group(function (){
-    Route::post('/filterPractices', 'App\Http\Controllers\matchController@filterPractices')->name('match.filterPractices');
+    Route::post('/filterPractices', 'App\Http\Controllers\MatchController@filterPractices')->name('match.filterPractices');
+    Route::post('/store', 'App\Http\Controllers\MatchController@store')->name('match.store');
+    Route::get('/{id}/show', 'App\Http\Controllers\MatchController@show')->name('match.show');
+    Route::post('/myMatchs', 'App\Http\Controllers\MatchController@myMatchs')->name('match.myMatchs');
+    Route::post('/destroy', 'App\Http\Controllers\MatchController@destroy')->name('match.destroy');
+
     
 
 });

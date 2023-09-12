@@ -55,6 +55,12 @@ class PracticeController extends Controller
             return ['state' => '1', 'exception' => (string) $e];
         }
     }
+    protected function show($id)
+    {
+        $practice = Practice::find($id);
+        $data = PracticeResource::collection(collect([$practice]));
+        return $data;
+    }
 
     protected function update(Request $request)
     {
