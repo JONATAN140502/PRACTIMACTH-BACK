@@ -18,6 +18,7 @@ class AreasCompanyResource extends JsonResource
             'id' => $this->id,
             'id_area'=>$this->id_area,
             'name_area' => $this->area->name,
+            'area'=>$this->area,
         ];
 
         

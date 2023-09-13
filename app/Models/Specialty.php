@@ -22,7 +22,7 @@ class Specialty extends Model
 
     public function area()
     {
-        return $this->belongsTo(\App\Models\Area::class);
+        return $this->belongsTo(\App\Models\Area::class,'id_area');
     }
 
     public function subspecialty()
