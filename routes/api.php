@@ -121,12 +121,12 @@ Route::prefix('user')->group(function (){
 });
 
 Route::prefix('practice')->group(function (){
-    Route::get('/', 'App\Http\Controllers\practiceController@index')->name('practice.index');
-    Route::post('/store', 'App\Http\Controllers\practiceController@store')->name('practice.store');
-    Route::post('/filter', 'App\Http\Controllers\practiceController@filter')->name('practice.filter');
-    Route::get('/{id}/show', 'App\Http\Controllers\practiceController@show')->name('practice.show');
-    Route::post('/update', 'App\Http\Controllers\practiceController@update')->name('practice.update');
-    Route::post('/destroy', 'App\Http\Controllers\practiceController@destroy')->name('practice.destroy');
+    Route::get('/', 'App\Http\Controllers\PracticeController@index')->name('practice.index');
+    Route::post('/store', 'App\Http\Controllers\PracticeController@store')->name('practice.store');
+    Route::post('/filter', 'App\Http\Controllers\PracticeController@filter')->name('practice.filter');
+    Route::get('/{id}/show', 'App\Http\Controllers\PracticeController@show')->name('practice.show');
+    Route::post('/update', 'App\Http\Controllers\PracticeController@update')->name('practice.update');
+    Route::post('/destroy', 'App\Http\Controllers\PracticeController@destroy')->name('practice.destroy');
 
 });
 Route::prefix('consulta')->group(function (){
