@@ -79,7 +79,8 @@ class MatchController extends Controller
         $practiceArray = [];
         foreach ($array as $key => $value) {
             $practice = Practice::where('id', $key)->where('status', 1)->get();
-            $practiceArray[] = $practice[0];
+            if(count($practice)>0){
+            $practiceArray[] = $practice[0];}
         }
         return $practiceArray;
     }

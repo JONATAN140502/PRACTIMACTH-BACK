@@ -46,6 +46,7 @@ class PracticeController extends Controller
                 KnowledgePractice::create([
                     'id_knowledges'=>$value,
                     'id_practice'=>$practice->id,
+                    'state'=>1,
                 ]);
             }
             \DB::commit();
