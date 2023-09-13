@@ -124,12 +124,16 @@ class StudentController extends Controller
     {
         try {
             DB::beginTransaction();
-
-            $knowledge_student=Knowledges_student::create([ 
-              'state'=>1,
-              'id_student'=> $request->id_student,
-              'id_knowledges'=> $request->id_knowledges,
-            ]);
+            //Registar en la tabla relacional Knowledge
+            $knowledges = $request->knowledges;
+            //$knowledges_array=explode(", ", $knowledges);
+            foreach ($knowledges as $value) {
+                KnowledgePractice::create([
+                    'id_knowledges'=>$value,
+                    'id_student'=> $request->id_student,
+                    'state'=>1,
+                ]);
+            }
             DB::commit();
             return response()->json(['state' => 0, 'data' =>$knowledge_student], 200);
         } catch (Exception $e) {
