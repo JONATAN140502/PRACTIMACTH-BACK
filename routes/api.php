@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/login')->group( function (){
     Route::post('/logincompany','App\Http\Controllers\LoginController@logincompany');   
     Route::post('/loginstudent','App\Http\Controllers\LoginController@loginstudent');    
+    Route::post('/loginadmin','App\Http\Controllers\LoginController@loginadmin'); 
     Route::post('/logoutcompany','App\Http\Controllers\LoginController@salircompany');
 });
 
@@ -88,7 +89,7 @@ Route::prefix('faculty')->group(function (){
     Route::get('/{id}/show', 'App\Http\Controllers\FacultyController@show')->name('faculty.show');
     Route::post('/update', 'App\Http\Controllers\FacultyController@update')->name('faculty.update');
     Route::post('/destroy', 'App\Http\Controllers\FacultyController@destroy')->name('faculty.destroy');
-
+    Route::post('/filter', 'App\Http\Controllers\FacultyController@filter')->name('faculty.filter');
 });
 Route::prefix('school')->group(function (){
     Route::get('/', 'App\Http\Controllers\SchoolController@index')->name('school.index');

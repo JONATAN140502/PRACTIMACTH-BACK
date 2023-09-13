@@ -57,7 +57,28 @@ public function loginstudent(Request $request)
          return response()->json(['state' => '1', 'exception' => (string) $e]);
     }
 }
-   
+public function loginadmin(Request $request)
+{
+    $hashedPassword = $request->password;
+
+    try {
+        $user = \App\Models\User::where('email', $request->login)->first();
+
+        if (!$user|| !Hash::check($hashedPassword, $user->password)) {
+            return response()->json([
+                'user' => null,
+                'state' => '1'
+            ], 200);
+        }
+
+        return response()->json([
+            'user' => $user,
+            'state' => '0'
+        ], 200);
+    } catch (Exception $e) {
+         return response()->json(['state' => '1', 'exception' => (string) $e]);
+    }
+}
 
     public function salircomapny(Request $request)
     {
