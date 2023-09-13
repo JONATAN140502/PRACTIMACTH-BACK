@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\{Company,Areas_company,area};
+use App\Models\{Company,Areas_company,Area};
 use App\Http\Resources\{CompanyResource, AreasCompanyResource,AreaResource};
 use Exception;
 use Illuminate\Support\Facades\DB;
