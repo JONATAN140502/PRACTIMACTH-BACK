@@ -96,7 +96,10 @@ class StudentController extends Controller
     protected function show($id)
     {
         $student = Student::find($id);
-        return new StudentResource($student);
+        $Knowledge = Knowledges_student::with('studiant')->where('id_student',$id)->get();
+        $respuesta=KnowledgesStudentResource::collection($Knowledge);
+        return response()->json(['data' => new StudentResource($student),'knowledge'=>$respuesta], 200);
+        
     }
 
     protected function destroy(Request $request)

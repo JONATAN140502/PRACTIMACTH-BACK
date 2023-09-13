@@ -25,5 +25,9 @@ class Student extends Model
     {
         return $this->school->faculty;
     }
+    public function match()
+    {
+        return $this->hasMany(\App\Models\Match::class,'id_student');
+    }
     
 }

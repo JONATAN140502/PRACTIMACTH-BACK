@@ -16,13 +16,14 @@ class MatchResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'date'=>$this->date,
-            'id_practice' => $this->id_practice,
-            'pratice_name'=>$this->practice->name,
             'id_student' => $this->id_student,
+            'id_practice' => $this->id_practice,
+            'date'=>$this->date,
+            'pratice_name'=>$this->practice->name,
+            'pratice_obj'=>$this->practice,
             'student_name'=>$this->student->name,
             'company_name'=>$this->practice->company->name,
-            'ratings'=>$this->ratings
+            'ratings'=>$this->ratings,
             
         ];
     }

@@ -30,4 +30,8 @@ class Practice extends Model
     {
         return $this->belongsTo(\App\Models\Company::class,'id_company');
     }
+    public function match()
+    {
+        return $this->hasMany(\App\Models\Match::class,'id_practice');
+    }
 }

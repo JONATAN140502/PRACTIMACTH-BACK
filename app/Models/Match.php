@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\{
     Model, SoftDeletes};
 
 class Match extends Model
-{
+{   
+    protected $table = 'matchs';
     use HasFactory, SoftDeletes;
 
     protected $fillable = [

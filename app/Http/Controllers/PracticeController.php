@@ -29,7 +29,7 @@ class PracticeController extends Controller
 
             $practice = Practice::create([
                 'name' => $request->name,
-                'date' => $request->date,
+                'date' => date("Y-m-d H:i:s"),
                 'modalidad' => $request->modalidad,
                 'descripcion' => $request->descripcion,
                 'state' => 1,
