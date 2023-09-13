@@ -89,7 +89,7 @@ Route::prefix('faculty')->group(function (){
     Route::get('/{id}/show', 'App\Http\Controllers\FacultyController@show')->name('faculty.show');
     Route::post('/update', 'App\Http\Controllers\FacultyController@update')->name('faculty.update');
     Route::post('/destroy', 'App\Http\Controllers\FacultyController@destroy')->name('faculty.destroy');
-
+    Route::post('/filter', 'App\Http\Controllers\FacultyController@filter')->name('faculty.filter');
 });
 Route::prefix('school')->group(function (){
     Route::get('/', 'App\Http\Controllers\SchoolController@index')->name('school.index');

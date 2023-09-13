@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Faculty;
+use App\Models\School;
 use App\Http\Resources\FacultyResource;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -15,9 +16,18 @@ class FacultyController extends Controller
     {
         $faculties = Faculty::orderBy('name', 'ASC')->get();
         $data = FacultyResource::collection($faculties);
-        return response()->json(['data' => $data], 200);
+        $schools = School::where('id_faculty', $request->faculty)
+        ->orderBy('name', 'ASC')
+        ->get();
+        return response()->json(['data' => $data,'schools'=>$schools], 200);
     }
-
+    protected function filter(Request $request)
+    { 
+        $schools = School::where('id_faculty', $request->faculty)
+        ->orderBy('name', 'ASC')
+        ->get();
+        return response()->json(['schools'=>$schools], 200);
+    }
     protected function store(Request $request)
     {
         try {
