@@ -16,8 +16,8 @@ class AreaController extends Controller
 
     protected function index(Request $request){
         $area = Area::with('specialty.subspecialty.knowledge')->where('state', 1)->orderBy('name', 'ASC')->get();
-        $data = AreaResource::collection($area);
-        return \response()->json(['data' => $data], 200);
+       // $data = AreaResource::collection($area);
+        return \response()->json(['data' => $area], 200);
     }
 
     protected function store(Request $request){
