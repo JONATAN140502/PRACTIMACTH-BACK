@@ -24,6 +24,6 @@ class Knowledge extends Model
 
     public function subspecialty()
     {
-        return $this->belongsTo(\App\Models\Subspecialty::class);
+        return $this->belongsTo(\App\Models\Subspecialty::class,'id_subspecialty');
     }
 }

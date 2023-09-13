@@ -26,7 +26,7 @@ class CompanyController extends Controller
         //$areas=AreasCompanyResource::collection($data_areas_of_company);
         foreach ($data_areas_of_company as $key) {
             //$area=Area::select('name')->find($key['id_area']);
-            $resp = \App\Models\Area::where('id',$key['id_area'])->with('specialty.subspecialty')->get();
+            $resp = \App\Models\Area::where('id',$key['id_area'])->with('specialty.subspecialty.knowledge')->get();
             //$data = AreaResource::collection($resp);
             $areas[]=$resp[0];
 
