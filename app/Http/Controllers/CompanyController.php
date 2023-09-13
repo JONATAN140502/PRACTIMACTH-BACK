@@ -114,7 +114,8 @@ class CompanyController extends Controller
         'department' ,
         'phone' ,
         'descripcion',
-        'valoration' 
+        'valoration',
+        'password'
         )->find($id);
         $data_areas_of_company = Areas_company::where('id_company',$id)->get();
         $areas=[];
