@@ -27,6 +27,7 @@ Route::prefix('match')->group(function (){
     Route::post('/store', 'App\Http\Controllers\MatchController@store')->name('match.store');
     Route::get('/{id}/show', 'App\Http\Controllers\MatchController@show')->name('match.show');
     Route::post('/myMatches', 'App\Http\Controllers\MatchController@myMatches')->name('match.myMatches');
+    Route::post('/practicesMatch', 'App\Http\Controllers\MatchController@practicesMatch')->name('match.practicesMatch');
     Route::post('/destroy', 'App\Http\Controllers\MatchController@destroy')->name('match.destroy');
 
     

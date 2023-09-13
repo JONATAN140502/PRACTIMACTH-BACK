@@ -14,6 +14,21 @@ use Illuminate\Http\Request;
 class MatchController extends Controller
 {
 
+    protected function practicesMatch (Request $request){
+        $Practice = \App\Models\Practice::with('company')->where('id_company',$request->id)->get();
+        $data=[];
+        foreach ($Practice as $value) {
+            $respuesta = Match::with('practice')->where('id_practice', $value['id'])->where('state', 1)->get();
+            if(count($respuesta) != 0){
+                //existe
+                $data[]=$value;
+
+            }
+
+        }
+        return $data;
+
+    }
     protected function store(Request $request)
     {
         //registrar el match
