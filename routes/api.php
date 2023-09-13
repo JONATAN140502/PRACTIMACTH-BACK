@@ -46,31 +46,31 @@ Route::prefix('company')->group(function (){
 });
 
 Route::prefix('area')->group(function (){
-    Route::get('/', 'App\Http\Controllers\areaController@index')->name('area.index');
-    Route::post('/store', 'App\Http\Controllers\areaController@store')->name('area.store');
-    Route::get('/{id}/show', 'App\Http\Controllers\areaController@show')->name('area.show');
-    Route::post('/update', 'App\Http\Controllers\areaController@update')->name('area.update');
-    Route::post('/destroy', 'App\Http\Controllers\areaController@destroy')->name('area.destroy');
+    Route::get('/', 'App\Http\Controllers\AreaController@index')->name('area.index');
+    Route::post('/store', 'App\Http\Controllers\AreaController@store')->name('area.store');
+    Route::get('/{id}/show', 'App\Http\Controllers\AreaController@show')->name('area.show');
+    Route::post('/update', 'App\Http\Controllers\AreaController@update')->name('area.update');
+    Route::post('/destroy', 'App\Http\Controllers\AreaController@destroy')->name('area.destroy');
 
 });
 
 Route::prefix('specialty')->group(function (){
-    Route::get('/', 'App\Http\Controllers\specialtyController@index')->name('specialty.index');
-    Route::post('/store', 'App\Http\Controllers\specialtyController@store')->name('specialty.store');
-    Route::post('/filter', 'App\Http\Controllers\specialtyController@filter')->name('specialty.filter');
-    Route::get('/{id}/show', 'App\Http\Controllers\specialtyController@show')->name('specialty.show');
-    Route::post('/update', 'App\Http\Controllers\specialtyController@update')->name('specialty.update');
-    Route::post('/destroy', 'App\Http\Controllers\specialtyController@destroy')->name('specialty.destroy');
+    Route::get('/', 'App\Http\Controllers\SpecialtyController@index')->name('specialty.index');
+    Route::post('/store', 'App\Http\Controllers\SpecialtyController@store')->name('specialty.store');
+    Route::post('/filter', 'App\Http\Controllers\SpecialtyController@filter')->name('specialty.filter');
+    Route::get('/{id}/show', 'App\Http\Controllers\SpecialtyController@show')->name('specialty.show');
+    Route::post('/update', 'App\Http\Controllers\SpecialtyController@update')->name('specialty.update');
+    Route::post('/destroy', 'App\Http\Controllers\SpecialtyController@destroy')->name('specialty.destroy');
 
 });
 
 Route::prefix('subspecialty')->group(function (){
-    Route::get('/', 'App\Http\Controllers\subspecialtyController@index')->name('subspecialty.index');
-    Route::post('/store', 'App\Http\Controllers\subspecialtyController@store')->name('subspecialty.store');
-    Route::post('/filter', 'App\Http\Controllers\subspecialtyController@filter')->name('subpecialty.filter');
-    Route::get('/{id}/show', 'App\Http\Controllers\subspecialtyController@show')->name('subspecialty.show');
-    Route::post('/update', 'App\Http\Controllers\subspecialty@update')->name('subspecialty.update');
-    Route::post('/destroy', 'App\Http\Controllers\subspecialtyController@destroy')->name('subspecialty.destroy');
+    Route::get('/', 'App\Http\Controllers\SubspecialtyController@index')->name('subspecialty.index');
+    Route::post('/store', 'App\Http\Controllers\SubspecialtyController@store')->name('subspecialty.store');
+    Route::post('/filter', 'App\Http\Controllers\SubspecialtyController@filter')->name('subpecialty.filter');
+    Route::get('/{id}/show', 'App\Http\Controllers\SubspecialtyController@show')->name('subspecialty.show');
+    Route::post('/update', 'App\Http\Controllers\Subspecialty@update')->name('subspecialty.update');
+    Route::post('/destroy', 'App\Http\Controllers\SubspecialtyController@destroy')->name('subspecialty.destroy');
 
 });
 
