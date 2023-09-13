@@ -1,14 +1,13 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\softDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes; // Correct the case
 
 class Area extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes; // Correct the case
 
     protected $fillable = [
         'id',
@@ -21,6 +20,6 @@ class Area extends Model
 
     public function specialty()
     {
-        return $this->hasMany(\App\Models\Specialty::class,'id_area');
+        return $this->hasMany(\App\Models\Specialty::class, 'id_area');
     }
 }
