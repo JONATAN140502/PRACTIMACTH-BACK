@@ -13,4 +13,9 @@ class areas_company extends Model
 
     protected $dates = ['deleted_at']; 
 
+    public function area()
+    {
+        return $this->belongsTo(\App\Models\Area::class, 'id_area');
+    }
+
 }

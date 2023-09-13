@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Company,Areas_company,area};
-use App\Http\Resources\CompanyResource;
+use App\Http\Resources\{CompanyResource, AreasCompanyResource};
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -19,6 +19,17 @@ class CompanyController extends Controller
         $companies = Company::orderBy('name', 'ASC')->get();
         $data = CompanyResource::collection($companies);
         return response()->json(['data' => $data], 200);
+    }
+    protected function filterAreas(Request $request)
+    {
+        $data_areas_of_company = Areas_company::where('id_company',$request->id)->get();
+        $areas=AreasCompanyResource::collection($data_areas_of_company);
+        /*foreach ($data_areas_of_company as $key) {
+            $area=Area::select('name')->find($key['id_area']);
+            $areas[]=$area['name'];
+
+        }*/
+        return response()->json(['data' => $areas], 200);
     }
 
     protected function store(Request $request)

@@ -35,6 +35,7 @@ Route::prefix('match')->group(function (){
 Route::prefix('company')->group(function (){
     Route::get('/', 'App\Http\Controllers\CompanyController@index')->name('company.index');
     Route::post('/storearea','App\Http\Controllers\CompanyController@storearea')->name('company.storearea');
+    Route::post('/filterAreas','App\Http\Controllers\CompanyController@filterAreas')->name('company.filterAreas');
     Route::post('/store', 'App\Http\Controllers\CompanyController@store')->name('company.store');
     Route::get('/{id}/show', 'App\Http\Controllers\CompanyController@show')->name('company.show');
     Route::post('/update', 'App\Http\Controllers\CompanyController@update')->name('company.update');
